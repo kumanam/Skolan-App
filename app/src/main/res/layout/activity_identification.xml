@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginHorizontal="130sp"
+        android:contentDescription="@string/logo_skolan"
+        android:src="@drawable/logo_skolan" />
+
+    <Button
+        android:id="@+id/buttonBankId"
+        android:layout_width="300sp"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/blue"
+        android:layout_marginHorizontal="50dp"
+        android:text="@string/logga_med_bankid"
+        android:textColor="@color/white">
+    </Button>
+
+    <TextView
+        android:id="@+id/txtForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/gl_mde_ditt_l_senord"
+        android:textColor="#0000FF"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/skapa_profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/skapa_profil"
+        android:textColor="#0000FF"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"/>
+
+
+
+
+</LinearLayout>
+

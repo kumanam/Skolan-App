@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Skolanapp</string>
+    <string name="logo_skolan">Logo skolan</string>
+    <string name="logga_med_bankid">Logga med BankId</string>
+    <string name="gl_mde_ditt_l_senord">¿Glömde ditt lösenord?</string>
+    <string name="skapa_profil">Skapa profil</string>
+</resources>
