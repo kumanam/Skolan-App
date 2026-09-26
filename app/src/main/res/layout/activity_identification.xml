@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/gl_mde_ditt_l_senord"
+        android:text="@string/glomde_ditt_losenord"
         android:textColor="#0000FF"
         android:clickable="true"
         android:focusable="true"
