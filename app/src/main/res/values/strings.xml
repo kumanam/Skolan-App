@@ -2,6 +2,16 @@
     <string name="app_name">Skolanapp</string>
     <string name="logo_skolan">Logo skolan</string>
     <string name="logga_med_bankid">Logga med BankId</string>
-    <string name="gl_mde_ditt_l_senord">¿Glömde ditt lösenord?</string>
+    <string name="glomde_ditt_losenord">¿Glömde ditt lösenord?</string>
     <string name="skapa_profil">Skapa profil</string>
+    <string name="skolan_app">SKOLAN APP</string>
+    <string name="menu">Menu</string>
+    <string name="notifications">Notifications</string>
+    <string name="hem">🏠 Hem</string>
+    <string name="nyheter">📰 Nyheter</string>
+    <string name="fodelsedagar">🎂 Födelsedagar</string>
+    <string name="kalender">📅 Kalender</string>
+    <string name="valkommen_till_skolan_app">Välkommen till Skolan App</string>
+    <string name="senaste">Senaste nytt från skolan</string>
+    <string name="v_lkommen_till_den_nya_skolappen">Välkommen till skolappen.</string>
 </resources>
