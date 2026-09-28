@@ -56,6 +56,64 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:fillViewport="false">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="8dp">
+
+                        <ImageButton
+                            android:id="@+id/buttonTeacherEmail"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@android:color/transparent"
+                            android:src="@android:drawable/ic_dialog_email"
+                            android:contentDescription="@string/larare_email"
+                            android:scaleType="centerInside" />
+
+
+                        <ImageButton
+                            android:id="@+id/buttonParentsEmail"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@android:color/transparent"
+                            android:src="@android:drawable/ic_dialog_email"
+                            android:contentDescription="@string/foraldrar_email"
+                            android:scaleType="centerInside" />
+
+                        <ImageButton
+                            android:id="@+id/buttonBirthdays"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@android:color/transparent"
+                            android:src="@android:drawable/ic_menu_my_calendar"
+                            android:contentDescription="@string/fodelsedagar"
+                            android:scaleType="centerInside" />
+
+                        <ImageButton
+                            android:id="@+id/buttonCalendar"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@android:color/transparent"
+                            android:src="@android:drawable/ic_menu_today"
+                            android:contentDescription="@string/kalender"
+                            android:scaleType="centerInside" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,6 +134,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/valkommen_till_skolan_app"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:text="@string/fodelsedagar"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Thomas Lövkvist"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="30 september"
                     android:textSize="16sp" />
 
             </LinearLayout>
