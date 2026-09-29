@@ -115,53 +115,9 @@
 
                 </HorizontalScrollView>
 
-
-                <TextView
-                    android:id="@+id/sectionNews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nyheter"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Senaste nytt från skolan"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Här visas en kort sammanfattning av skolans senaste information."
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/buttonReadNews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Läs mer" />
-
-
-                <LinearLayout
-                    android:id="@+id/fullNews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="Här kommer den fullständiga informationen från skolan. Här kan skolan publicera meddelanden, viktiga datum och annan information till föräldrar."
-                        android:textSize="16sp" />
-
-                </LinearLayout>
+                <include
+                    android:id="@+id/newsLayout"
+                    layout="@layout/activity_news" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -224,7 +180,7 @@
                         android:text="Här visas alla kommande födelsedagar."
                         android:textSize="16sp" />
                 </LinearLayout>
-               
+
                 <TextView
                     android:id="@+id/sectionCalendar"
                     android:layout_width="match_parent"
@@ -247,7 +203,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/las_mer" />
-
                 <LinearLayout
                     android:id="@+id/fullCalendar"
                     android:layout_width="match_parent"
@@ -255,29 +210,10 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="30 september – Födelsedag Thomas Lövkvist"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="1 oktober – Föräldramöte"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="5 oktober – Utflykt"
-                        android:textSize="16sp" />
+                    <include
+                        layout="@layout/activity_calender" />
 
                 </LinearLayout>
-
             </LinearLayout>
 
         </ScrollView>
