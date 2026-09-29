@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isGone
 import com.example.skolanapp.databinding.ActivityUserSelectionBinding
+import com.example.skolanapp.databinding.ActivityNewsBinding
 
 class UserSelectionActivity : AppCompatActivity() {
 
@@ -17,16 +18,18 @@ class UserSelectionActivity : AppCompatActivity() {
         binding = ActivityUserSelectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val newsBinding = ActivityNewsBinding.bind(binding.newsLayout.root)
+
         binding.buttonMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
 
         binding.menuNews.setOnClickListener {
 
-            binding.sectionNews.post {
+            newsBinding.sectionNews.post {
                 binding.mainScroll.smoothScrollTo(
                     0,
-                    binding.sectionNews.top
+                    newsBinding.sectionNews.top
                 )
             }
 
@@ -60,13 +63,13 @@ class UserSelectionActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        binding.buttonReadNews.setOnClickListener {
-            if (binding.fullNews.isGone) {
-                binding.fullNews.visibility = View.VISIBLE
-                binding.buttonReadNews.text = getString(R.string.visa_mindre)
+        newsBinding.buttonReadNews.setOnClickListener {
+            if (newsBinding.fullNews.isGone) {
+                newsBinding.fullNews.visibility = View.VISIBLE
+                newsBinding.buttonReadNews.text = getString(R.string.visa_mindre)
             } else {
-                binding.fullNews.visibility = View.GONE
-                binding.buttonReadNews.text = getString(R.string.las_mer)
+                newsBinding.fullNews.visibility = View.GONE
+                newsBinding.buttonReadNews.text = getString(R.string.las_mer)
             }
         }
 
