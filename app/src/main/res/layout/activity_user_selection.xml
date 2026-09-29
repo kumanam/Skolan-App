@@ -200,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Läs mer" />
+                    android:text= "@string/las_mer" />
 
 
                 <LinearLayout
@@ -224,7 +224,7 @@
                         android:text="Här visas alla kommande födelsedagar."
                         android:textSize="16sp" />
                 </LinearLayout>
-                <!-- KALENDER -->
+               
                 <TextView
                     android:id="@+id/sectionCalendar"
                     android:layout_width="match_parent"
