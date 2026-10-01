@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Skolanapp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".BirthdayActivity"
+            android:exported="false" />
         <activity
             android:name=".UserSelectionActivity"
             android:exported="false" />
