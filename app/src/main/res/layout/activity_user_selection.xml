@@ -50,7 +50,8 @@
         <ScrollView
             android:id="@+id/mainScroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,9 +135,7 @@
                     android:text="@string/valkommen_till_skolan_app"
                     android:textSize="16sp" />
 
-
                 <TextView
-                    android:id="@+id/sectionBirthdays"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
@@ -145,6 +144,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textNextBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -152,34 +152,12 @@
                     android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/buttonReadBirthdays"
+                    android:id="@+id/buttonViewBirthdays"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text= "@string/las_mer" />
+                    android:text="@string/las_mer" />
 
-
-                <LinearLayout
-                    android:id="@+id/fullBirthdays"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="Thomas Lövkvist – 30 september"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Här visas alla kommande födelsedagar."
-                        android:textSize="16sp" />
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/sectionCalendar"
@@ -220,65 +198,8 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/navigationDrawer"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:orientation="vertical"
-        android:background="@android:color/white">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="@string/skolan_app"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/menuHome"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="@string/hem"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/menuNews"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="@string/nyheter"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/menuBirthdays"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="@string/fodelsedagar"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/menuCalendar"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="@string/kalender"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+    <include
+        android:id="@+id/drawerMenu"
+        layout="@layout/drawer_menu_side" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- LUNES -->
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
@@ -53,7 +52,6 @@
 
             </LinearLayout>
 
-            <!-- MARTES -->
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
@@ -89,7 +87,6 @@
 
             </LinearLayout>
 
-            <!-- MIÉRCOLES -->
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
@@ -125,7 +122,6 @@
 
             </LinearLayout>
 
-            <!-- JUEVES -->
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
@@ -161,7 +157,7 @@
 
             </LinearLayout>
 
-            <!-- VIERNES -->
+
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"

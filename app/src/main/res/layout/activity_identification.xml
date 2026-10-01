@@ -19,33 +19,6 @@
         android:backgroundTint="@color/blue"
         android:layout_marginHorizontal="50dp"
         android:text="@string/logga_med_bankid"
-        android:textColor="@color/white">
-    </Button>
-
-    <TextView
-        android:id="@+id/txtForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/glomde_ditt_losenord"
-        android:textColor="#0000FF"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/skapa_profil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/skapa_profil"
-        android:textColor="#0000FF"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_gravity="center"/>
-
-
-
-
+        android:textColor="@color/white"/>
 </LinearLayout>
 
