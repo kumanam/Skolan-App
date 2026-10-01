@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!-- TÍTULO -->
     <TextView
         android:id="@+id/sectionNews"
         android:layout_width="match_parent"
@@ -16,45 +15,10 @@
         android:textSize="26sp"
         android:textStyle="bold" />
 
-    <!-- RESUMEN -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Senaste nytt från skolan"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Här visas en kort sammanfattning av skolans senaste information."
-        android:textSize="16sp" />
-
-    <!-- BOTÓN -->
-    <Button
-        android:id="@+id/buttonReadNews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/las_mer" />
-
-    <!-- INFORMACIÓN COMPLETA -->
-    <LinearLayout
-        android:id="@+id/fullNews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Här kommer den fullständiga informationen från skolan. Här kan skolan publicera meddelanden, viktiga datum och annan information till föräldrar."
-            android:textSize="16sp" />
-
-    </LinearLayout>
+        android:layout_marginTop="15dp" />
 
 </LinearLayout>
