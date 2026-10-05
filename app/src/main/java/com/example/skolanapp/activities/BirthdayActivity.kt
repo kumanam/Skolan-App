@@ -1,9 +1,11 @@
-package com.example.skolanapp
+package com.example.skolanapp.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.skolanapp.databinding.ActivityBirthdayBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skolanapp.models.Birthday
+import com.example.skolanapp.adapters.BirthdayAdapter
 
 class BirthdayActivity : AppCompatActivity() {
 

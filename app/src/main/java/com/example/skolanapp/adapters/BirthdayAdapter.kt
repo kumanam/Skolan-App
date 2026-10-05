@@ -1,8 +1,9 @@
-package com.example.skolanapp
+package com.example.skolanapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.skolanapp.models.Birthday
 import com.example.skolanapp.databinding.ItemBirthdayBinding
 
 class BirthdayAdapter(

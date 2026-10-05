@@ -1,4 +1,4 @@
-package com.example.skolanapp
+package com.example.skolanapp.models
 
 data class Birthday(
     val name: String,
