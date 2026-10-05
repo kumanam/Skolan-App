@@ -169,10 +169,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textNextActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="@string/nasta_aktivitet"
+                    android:text=""
                     android:textSize="16sp" />
 
                 <Button
@@ -181,17 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/las_mer" />
-                <LinearLayout
-                    android:id="@+id/fullCalendar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
 
-                    <include
-                        layout="@layout/activity_calender" />
-
-                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

@@ -1,15 +1,16 @@
-package com.example.skolanapp
+package com.example.skolanapp.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.isGone
 import com.example.skolanapp.databinding.ActivityNewsBinding
 import com.example.skolanapp.databinding.ActivityUserSelectionBinding
 import com.example.skolanapp.databinding.DrawerMenuSideBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skolanapp.models.News
+import com.example.skolanapp.adapters.NewsAdapter
+import com.example.skolanapp.models.CalendarEvent
 
 class UserSelectionActivity : AppCompatActivity() {
 
@@ -40,6 +41,27 @@ class UserSelectionActivity : AppCompatActivity() {
                 "Skolan kommer att vara stängd den 1 november. Elever och föräldrar behöver planera denna dag."
             )
         )
+
+        val calendarEvents = listOf(
+            CalendarEvent("Måndag", "08:00", "Svenska"),
+            CalendarEvent("Måndag", "10:00", "Matematik"),
+
+            CalendarEvent("Tisdag", "09:00", "Matematik"),
+            CalendarEvent("Tisdag", "11:00", "Svenska"),
+
+            CalendarEvent("Onsdag", "08:00", "Svenska"),
+            CalendarEvent("Onsdag", "15:30", "Möte med läraren"),
+
+            CalendarEvent("Torsdag", "09:00", "Engelska"),
+            CalendarEvent("Torsdag", "13:00", "Matematik"),
+
+            CalendarEvent("Fredag", "10:00", "Idrott"),
+            CalendarEvent("Fredag", "12:00", "Musik")
+        )
+
+        binding.textNextActivity.text =
+            "Nästa aktivitet: ${calendarEvents[0].title} – ${calendarEvents[0].day} ${calendarEvents[0].time}"
+        
         newsBinding.recyclerNews.layoutManager = LinearLayoutManager(this)
         newsBinding.recyclerNews.adapter = NewsAdapter(news)
 
@@ -84,30 +106,19 @@ class UserSelectionActivity : AppCompatActivity() {
         }
 
         drawerBinding.menuCalendar.setOnClickListener {
-            binding.sectionCalendar.post {
-                binding.mainScroll.smoothScrollTo(
-                    0,
-                    binding.sectionCalendar.top)
-            }
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+
             binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        binding.buttonCalendar.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
         }
 
         binding.buttonReadCalendar.setOnClickListener {
-            if (binding.fullCalendar.isGone) {
-                binding.fullCalendar.visibility = View.VISIBLE
-                binding.buttonReadCalendar.text =
-                    getString(R.string.visa_mindre)
-
-                binding.sectionCalendar.post {
-                    binding.mainScroll.smoothScrollTo(
-                        0,
-                        binding.sectionCalendar.top)
-                }
-            } else {
-                binding.fullCalendar.visibility = View.GONE
-                binding.buttonReadCalendar.text =
-                    getString(R.string.las_mer)
-            }
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
         }
     }
-}
