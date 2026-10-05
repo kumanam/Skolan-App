@@ -1,8 +1,10 @@
-package com.example.skolanapp
+package com.example.skolanapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.skolanapp.models.News
+import com.example.skolanapp.R
 import com.example.skolanapp.databinding.ItemNewsBinding
 
 class NewsAdapter(
@@ -35,24 +37,27 @@ class NewsAdapter(
 
         holder.binding.textNewsTitle.text = newsItem.title
         holder.binding.textNewsDescription.text = newsItem.description
-        holder.binding.buttonReadMore.text =  holder.itemView.context.getString(R.string.las_mer)
+        holder.binding.buttonReadMore.text =
+            holder.itemView.context.getString(R.string.las_mer)
+
+        var expanded = false
 
         holder.binding.buttonReadMore.setOnClickListener {
 
-            if (holder.binding.buttonReadMore.text == "Läs mer") {
+            expanded = !expanded
 
+            if (expanded) {
                 holder.binding.textNewsDescription.text = newsItem.fullText
                 holder.binding.buttonReadMore.text =
                     holder.itemView.context.getString(R.string.visa_mindre)
-
             } else {
-
                 holder.binding.textNewsDescription.text = newsItem.description
                 holder.binding.buttonReadMore.text =
                     holder.itemView.context.getString(R.string.las_mer)
             }
         }
     }
+
     override fun getItemCount(): Int {
         return news.size
     }
