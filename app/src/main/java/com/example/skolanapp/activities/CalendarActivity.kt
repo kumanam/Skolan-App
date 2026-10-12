@@ -1,11 +1,19 @@
 package com.example.skolanapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skolanapp.adapters.CalendarAdapter
 import com.example.skolanapp.databinding.ActivityCalenderBinding
-import com.example.skolanapp.models.CalendarEvent
+import android.widget.Toast
+import com.example.skolanapp.R
+import com.example.skolanapp.api.RetrofitClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -17,64 +25,49 @@ class CalendarActivity : AppCompatActivity() {
         binding = ActivityCalenderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val calendarEvents = listOf(
-            CalendarEvent("Måndag", "08:00", "Svenska"),
-            CalendarEvent("Måndag", "10:00", "Matematik"),
+        binding.recyclerMonday.layoutManager = LinearLayoutManager(this)
+        binding.recyclerTuesday.layoutManager = LinearLayoutManager(this)
+        binding.recyclerWednesday.layoutManager = LinearLayoutManager(this)
+        binding.recyclerThursday.layoutManager = LinearLayoutManager(this)
+        binding.recyclerFriday.layoutManager = LinearLayoutManager(this)
 
-            CalendarEvent("Tisdag", "09:00", "Matematik"),
-            CalendarEvent("Tisdag", "11:00", "Svenska"),
+        binding.buttonMonth.setOnClickListener {
+            val intent = Intent(this, MonthActivity::class.java)
+            startActivity(intent)
+        }
 
-            CalendarEvent("Onsdag", "08:00", "Svenska"),
-            CalendarEvent("Onsdag", "15:30", "Möte med läraren"),
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val schoolData = withContext(Dispatchers.IO) {
+                    RetrofitClient.schoolDataApi.getSchoolData()
+                }
 
-            CalendarEvent("Torsdag", "09:00", "Engelska"),
-            CalendarEvent("Torsdag", "13:00", "Matematik"),
+                val calendarEvents = schoolData.calendar
 
-            CalendarEvent("Fredag", "10:00", "Idrott"),
-            CalendarEvent("Fredag", "12:00", "Musik")
-        )
+                binding.recyclerMonday.adapter =
+                    CalendarAdapter(calendarEvents.filter { it.day == getString(R.string.mandag) })
 
-        binding.recyclerMonday.layoutManager =
-            LinearLayoutManager(this)
+                binding.recyclerTuesday.adapter =
+                    CalendarAdapter(calendarEvents.filter { it.day == getString(R.string.tisdag) })
 
-        binding.recyclerMonday.adapter =
-            CalendarAdapter(
-                calendarEvents.filter { it.day == "Måndag" }
-            )
-        binding.recyclerTuesday.layoutManager =
-            LinearLayoutManager(this)
+                binding.recyclerWednesday.adapter =
+                    CalendarAdapter(calendarEvents.filter { it.day == getString(R.string.onsdag) })
 
-        binding.recyclerTuesday.adapter =
-            CalendarAdapter(
-                calendarEvents.filter { it.day == "Tisdag" }
-            )
+                binding.recyclerThursday.adapter =
+                    CalendarAdapter(calendarEvents.filter { it.day == getString(R.string.torsdag) })
 
+                binding.recyclerFriday.adapter =
+                    CalendarAdapter(calendarEvents.filter { it.day == getString(R.string.fredag) })
 
-        binding.recyclerWednesday.layoutManager =
-            LinearLayoutManager(this)
+            } catch (e: Exception) {
+                e.printStackTrace()
 
-        binding.recyclerWednesday.adapter =
-            CalendarAdapter(
-                calendarEvents.filter { it.day == "Onsdag" }
-            )
-
-
-        binding.recyclerThursday.layoutManager =
-            LinearLayoutManager(this)
-
-        binding.recyclerThursday.adapter =
-            CalendarAdapter(
-                calendarEvents.filter { it.day == "Torsdag" }
-            )
-
-
-        binding.recyclerFriday.layoutManager =
-            LinearLayoutManager(this)
-
-        binding.recyclerFriday.adapter =
-            CalendarAdapter(
-                calendarEvents.filter { it.day == "Fredag" }
-            )
+                Toast.makeText(
+                    this@CalendarActivity,
+                    "Error: ${e.javaClass.simpleName}: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
-
 }
