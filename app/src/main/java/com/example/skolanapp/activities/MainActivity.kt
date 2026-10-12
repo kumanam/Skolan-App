@@ -16,7 +16,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonBankId.setOnClickListener {
-            val intent = Intent(this, UserSelectionActivity::class.java)
+            val intent = Intent(this, ChildSelectionActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonTeacher.setOnClickListener {
+            val intent = Intent(this, TeacherActivity::class.java)
             startActivity(intent)
         }
     }
