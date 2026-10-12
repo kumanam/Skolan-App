@@ -19,4 +19,31 @@
     <string name="las_mer">Läs mer</string>
     <string name="visa_mindre">Visa mindre</string>
     <string name="nasta_aktivitet">Nästa aktivitet: Födelsedag Thomas Lövkvist – 30 september</string>
+    <string name="manad">Månad</string>
+    <string name="mandag">Måndag</string>
+    <string name="tisdag">Tisdag</string>
+    <string name="onsdag">Onsdag</string>
+    <string name="torsdag">Torsdag</string>
+    <string name="fredag">Fredag</string>
+    <string name="vecka">V.</string>
+    <string name="man">Mån</string>
+    <string name="tis">Tis</string>
+    <string name="ons">Ons</string>
+    <string name="tor">Tor</string>
+    <string name="fre">Fre</string>
+    <string name="lor">Lör</string>
+    <string name="son">Sön</string>
+    <string name="calendar_load_error">Kunde inte ladda kalendern</string>
+    <string name="selected_child">Barn: %1$s</string>
+    <string name="news_load_error">Kunde inte ladda nyheterna: %1$s</string>
+    <string name="next_activity">Nästa aktivitet: %1$s – %2$s %3$s</string>
+    <string name="no_planned_activity">Nästa aktivitet: Ingen planerad aktivitet</string>
+    <string name="next_activity_load_error">Kunde inte ladda nästa aktivitet: %1$s</string>
+    <string name="month_title">%1$s %2$d</string>
+    <string name="birthdays_load_error">Kunde inte ladda födelsedagarna.</string>
+    <string name="login_parent">Logga in som vårdnadshavare</string>
+    <string name="login_teacher">Logga in som lärare</string>
+    <string name="teacher_title">Lärarportalen</string>
+    <string name="teacher_message">Lärarinloggning kommer snart.</string>
+
 </resources>
