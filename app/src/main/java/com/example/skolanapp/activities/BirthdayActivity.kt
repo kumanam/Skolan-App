@@ -1,11 +1,17 @@
 package com.example.skolanapp.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.skolanapp.databinding.ActivityBirthdayBinding
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.skolanapp.models.Birthday
+import com.example.skolanapp.R
 import com.example.skolanapp.adapters.BirthdayAdapter
+import com.example.skolanapp.api.RetrofitClient
+import com.example.skolanapp.databinding.ActivityBirthdayBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BirthdayActivity : AppCompatActivity() {
 
@@ -17,14 +23,29 @@ class BirthdayActivity : AppCompatActivity() {
         binding = ActivityBirthdayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val birthdays = listOf(
-            Birthday("Thomas Lövkvist", "30 september"),
-            Birthday("Anna Andersson", "12 oktober"),
-            Birthday("Lucas Svensson", "25 oktober"),
-            Birthday("Maria Johansson", "3 november")
-        )
+        binding.recyclerBirthdays.layoutManager =
+            LinearLayoutManager(this)
 
-        binding.recyclerBirthdays.layoutManager = LinearLayoutManager(this)
-        binding.recyclerBirthdays.adapter = BirthdayAdapter(birthdays)
+        loadBirthdays()
+    }
+
+    private fun loadBirthdays() {
+        lifecycleScope.launch {
+            try {
+                val schoolData = withContext(Dispatchers.IO) {
+                    RetrofitClient.schoolDataApi.getSchoolData()
+                }
+
+                binding.recyclerBirthdays.adapter =
+                    BirthdayAdapter(schoolData.birthdays)
+
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@BirthdayActivity,
+                    getString(R.string.birthdays_load_error),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 }
