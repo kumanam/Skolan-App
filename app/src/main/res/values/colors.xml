@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#122568</color>
+    <color name="calendar_today_background">#D6EAF8</color>
 </resources>
