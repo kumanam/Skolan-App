@@ -83,25 +83,16 @@
                         android:gravity="center_vertical"
                         android:padding="8dp">
 
-                        <ImageButton
-                            android:id="@+id/buttonTeacherEmail"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="12dp"
-                            android:background="@android:color/transparent"
-                            android:src="@android:drawable/ic_dialog_email"
-                            android:contentDescription="@string/larare_email"
-                            android:scaleType="centerInside" />
 
                         <ImageButton
-                            android:id="@+id/buttonParentsEmail"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
+                            android:id="@+id/buttonEmail"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
                             android:layout_marginEnd="12dp"
                             android:background="@android:color/transparent"
-                            android:src="@android:drawable/ic_dialog_email"
-                            android:contentDescription="@string/foraldrar_email"
-                            android:scaleType="centerInside" />
+                            android:contentDescription="@string/email"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/message" />
 
                         <ImageButton
                             android:id="@+id/buttonBirthdays"
@@ -109,7 +100,7 @@
                             android:layout_height="56dp"
                             android:layout_marginEnd="12dp"
                             android:background="@android:color/transparent"
-                            android:src="@android:drawable/ic_menu_my_calendar"
+                            android:src="@drawable/cake"
                             android:contentDescription="@string/fodelsedagar"
                             android:scaleType="centerInside" />
 
@@ -119,7 +110,7 @@
                             android:layout_height="56dp"
                             android:layout_marginEnd="12dp"
                             android:background="@android:color/transparent"
-                            android:src="@android:drawable/ic_menu_today"
+                            android:src="@drawable/baseline_calendar_month_24"
                             android:contentDescription="@string/kalender"
                             android:scaleType="centerInside" />
 
@@ -159,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Nästa födelsedag: Thomas Lövkvist – 30 september"
+                    android:text="@string/next_birthday"
                     android:textSize="16sp" />
 
                 <Button
@@ -186,13 +177,6 @@
                     android:layout_marginTop="15dp"
                     android:text=""
                     android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/buttonReadCalendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/las_mer" />
 
             </LinearLayout>
 
