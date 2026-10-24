@@ -45,5 +45,24 @@
     <string name="login_teacher">Logga in som lärare</string>
     <string name="teacher_title">Lärarportalen</string>
     <string name="teacher_message">Lärarinloggning kommer snart.</string>
+    <string name="email_title">E-post och kontakter</string>
+    <string name="contact_all">Alla kontakter</string>
+    <string name="contact_school">Skola</string>
+    <string name="contact_teacher">Lärare</string>
+    <string name="contact_guardian">Vårdnadshavare</string>
+    <string name="contact_send_email">Skicka e-post</string>
+    <string name="contact_email_subject">Kontakt från skolan</string>
+    <string name="contacts_load_error">Kunde inte ladda kontakterna.</string>
+    <string name="email_app_not_found">Ingen e-postapp hittades.</string>
+    <string name="birthday_guardian_info">%1$s · %2$s</string>
+    <string name="birthday_guardian_missing">Ingen vårdnadshavare registrerad</string>
+    <string name="email">Email</string>
+    <string name="next_birthday">Nästa födelsedag: %1$s – %2$s</string>
+    <string name="valj_barn">Välj barn</string>
+    <string name="valj_vilket_barn_du_vill_se_information_om">Välj vilket barn du vill se information om.</string>
+    <string name="no_upcoming_birthday">Inga kommande födelsedagar</string>
+    <string name="schooldata_load_error">Kunde inte ladda skolans information.</string>
+    <string name="no_email_app">Ingen e-postapp hittades.</string>
+
 
 </resources>
