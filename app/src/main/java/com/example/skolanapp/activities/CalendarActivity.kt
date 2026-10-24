@@ -1,6 +1,5 @@
 package com.example.skolanapp.activities
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,11 +29,6 @@ class CalendarActivity : AppCompatActivity() {
         binding.recyclerWednesday.layoutManager = LinearLayoutManager(this)
         binding.recyclerThursday.layoutManager = LinearLayoutManager(this)
         binding.recyclerFriday.layoutManager = LinearLayoutManager(this)
-
-        binding.buttonMonth.setOnClickListener {
-            val intent = Intent(this, MonthActivity::class.java)
-            startActivity(intent)
-        }
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
