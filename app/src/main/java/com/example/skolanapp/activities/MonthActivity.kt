@@ -1,15 +1,23 @@
-
 package com.example.skolanapp.activities
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.skolanapp.R
+import com.example.skolanapp.api.RetrofitClient
 import com.example.skolanapp.databinding.ActivityMonthBinding
+import com.example.skolanapp.models.CalendarEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 import java.util.Locale
 
@@ -17,18 +25,40 @@ class MonthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMonthBinding
 
+    private var calendarEvents: List<CalendarEvent> = emptyList()
+    private val displayedMonth = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMonthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val today = Calendar.getInstance()
+        loadCalendarEvents()
+    }
 
-        val month = today.get(Calendar.MONTH)
-        val year = today.get(Calendar.YEAR)
+    private fun loadCalendarEvents() {
+        lifecycleScope.launch {
+            try {
+                calendarEvents = withContext(Dispatchers.IO) {
+                    RetrofitClient.schoolDataApi.getSchoolData().calendar
+                }
 
-        val monthName = today.getDisplayName(
+                renderMonth()
+
+            } catch (e: Exception) {
+                Log.e("MonthActivity", "Error loading calendar", e)
+
+                renderMonth()
+            }
+        }
+    }
+
+    private fun renderMonth() {
+        val year = displayedMonth.get(Calendar.YEAR)
+        val month = displayedMonth.get(Calendar.MONTH)
+
+        val monthName = displayedMonth.getDisplayName(
             Calendar.MONTH,
             Calendar.LONG,
             Locale("sv", "SE")
@@ -44,7 +74,6 @@ class MonthActivity : AppCompatActivity() {
     }
 
     private fun createMonthCalendar(year: Int, month: Int) {
-
         binding.monthGrid.removeAllViews()
 
         val today = Calendar.getInstance()
@@ -52,11 +81,17 @@ class MonthActivity : AppCompatActivity() {
         val todayMonth = today.get(Calendar.MONTH)
         val todayDay = today.get(Calendar.DAY_OF_MONTH)
 
-        // Encabezado
-        val header = LinearLayout(this)
-        header.orientation = LinearLayout.HORIZONTAL
+        val eventsByDate = calendarEvents.groupBy { it.date }
 
-        addCell(header, getString(R.string.vecka), 40, true)
+        val header = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                dpToPx(36)
+            )
+        }
+
+        addHeaderCell(header, getString(R.string.vecka), isWeekNumber = true)
 
         val days = listOf(
             getString(R.string.man),
@@ -68,62 +103,69 @@ class MonthActivity : AppCompatActivity() {
             getString(R.string.son)
         )
 
-        for (day in days) {
-            addCell(header, day, 75, true)
+        days.forEach { day ->
+            addHeaderCell(header, day)
         }
 
         binding.monthGrid.addView(header)
 
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, 1)
-        calendar.set(Calendar.HOUR_OF_DAY, 12)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-
-        val firstDay = calendar.get(Calendar.DAY_OF_WEEK)
-
-        val mondayBasedDay = when (firstDay) {
-            Calendar.MONDAY -> 0
-            Calendar.TUESDAY -> 1
-            Calendar.WEDNESDAY -> 2
-            Calendar.THURSDAY -> 3
-            Calendar.FRIDAY -> 4
-            Calendar.SATURDAY -> 5
-            Calendar.SUNDAY -> 6
-            else -> 0
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, month)
+            set(Calendar.DAY_OF_MONTH, 1)
+            set(Calendar.HOUR_OF_DAY, 12)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
         }
 
+        val firstDay = calendar.get(Calendar.DAY_OF_WEEK)
+        val mondayBasedDay = (firstDay + 5) % 7
 
         calendar.add(Calendar.DAY_OF_MONTH, -mondayBasedDay)
 
         repeat(6) {
+            val weekRow = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    dpToPx(82)
+                )
+            }
 
-            val weekRow = LinearLayout(this)
-            weekRow.orientation = LinearLayout.HORIZONTAL
-
-            val weekNumber = calendar.get(Calendar.WEEK_OF_YEAR)
-
-            addCell(
+            addWeekNumber(
                 weekRow,
-                weekNumber.toString(),
-                40,
-                true
+                calendar.get(Calendar.WEEK_OF_YEAR).toString()
             )
 
             repeat(7) {
-
+                val cellYear = calendar.get(Calendar.YEAR)
+                val cellMonth = calendar.get(Calendar.MONTH)
                 val dayNumber = calendar.get(Calendar.DAY_OF_MONTH)
 
                 val isToday =
-                    calendar.get(Calendar.YEAR) == todayYear &&
-                            calendar.get(Calendar.MONTH) == todayMonth &&
+                    cellYear == todayYear &&
+                            cellMonth == todayMonth &&
                             dayNumber == todayDay
 
-                val cell = createDayCell(dayNumber, isToday)
+                val dateKey = String.format(
+                    Locale.ROOT,
+                    "%04d-%02d-%02d",
+                    cellYear,
+                    cellMonth + 1,
+                    dayNumber
+                )
+
+                val dayEvents = eventsByDate[dateKey].orEmpty()
+
+                val cell = createDayCell(
+                    dayNumber = dayNumber,
+                    isCurrentMonth = cellMonth == month,
+                    isToday = isToday,
+                    events = dayEvents
+                )
 
                 weekRow.addView(cell)
-
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
             }
 
@@ -131,34 +173,44 @@ class MonthActivity : AppCompatActivity() {
         }
     }
 
-    private fun addCell(
+    private fun addHeaderCell(
         row: LinearLayout,
         text: String,
-        width: Int,
-        bold: Boolean
+        isWeekNumber: Boolean = false
     ) {
+        val cell = TextView(this).apply {
+            layoutParams = if (isWeekNumber) {
+                LinearLayout.LayoutParams(
+                    dpToPx(34),
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            } else {
+                LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    1f
+                )
+            }
 
-        val cell = TextView(this)
+            gravity = Gravity.CENTER
+            this.text = text
+            textSize = 12f
+            setTypeface(null, Typeface.BOLD)
+        }
 
-        cell.layoutParams = LinearLayout.LayoutParams(
-            dpToPx(width),
-            dpToPx(80)
-        )
+        row.addView(cell)
+    }
 
-        cell.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-
-        cell.setPadding(
-            dpToPx(6),
-            dpToPx(6),
-            dpToPx(6),
-            dpToPx(6)
-        )
-
-        cell.text = text
-        cell.textSize = 14f
-
-        if (bold) {
-            cell.setTypeface(null, Typeface.BOLD)
+    private fun addWeekNumber(row: LinearLayout, week: String) {
+        val cell = TextView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                dpToPx(34),
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            setPadding(0, dpToPx(6), 0, 0)
+            text = week
+            textSize = 10f
         }
 
         row.addView(cell)
@@ -166,33 +218,86 @@ class MonthActivity : AppCompatActivity() {
 
     private fun createDayCell(
         dayNumber: Int,
-        isToday: Boolean
-    ): TextView {
+        isCurrentMonth: Boolean,
+        isToday: Boolean,
+        events: List<CalendarEvent>
+    ): LinearLayout {
 
-        val cell = TextView(this)
+        val cell = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
 
-        cell.layoutParams = LinearLayout.LayoutParams(
-            dpToPx(75),
-            dpToPx(80)
-        )
-
-        cell.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-
-        cell.setPadding(
-            dpToPx(6),
-            dpToPx(6),
-            dpToPx(6),
-            dpToPx(6)
-        )
-
-        cell.text = dayNumber.toString()
-        cell.textSize = 14f
-
-        if (isToday) {
-            cell.setTypeface(null, Typeface.BOLD)
-            cell.setBackgroundColor(
-                ContextCompat.getColor(this, R.color.calendar_today_background)
+            layoutParams = LinearLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                1f
             )
+
+            setPadding(
+                dpToPx(2),
+                dpToPx(4),
+                dpToPx(2),
+                dpToPx(2)
+            )
+
+            if (isToday) {
+                setBackgroundColor(
+                    ContextCompat.getColor(
+                        this@MonthActivity,
+                        R.color.calendar_today_background
+                    )
+                )
+            }
+        }
+
+        val dayText = TextView(this).apply {
+            text = dayNumber.toString()
+            textSize = 12f
+            gravity = Gravity.CENTER
+
+            if (isToday) {
+                setTypeface(null, Typeface.BOLD)
+            }
+
+            if (!isCurrentMonth) {
+                setTextColor(Color.LTGRAY)
+            }
+        }
+
+        cell.addView(
+            dayText,
+            LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                dpToPx(20)
+            )
+        )
+
+        events.take(2).forEach { event ->
+            val eventText = TextView(this).apply {
+                text = event.title
+                textSize = 8f
+                maxLines = 2
+                gravity = Gravity.CENTER
+                setTypeface(null, Typeface.BOLD)
+            }
+
+            cell.addView(
+                eventText,
+                LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            )
+        }
+
+        if (events.size > 2) {
+            val moreText = TextView(this).apply {
+                text = "+${events.size - 2}"
+                textSize = 8f
+                gravity = Gravity.CENTER
+            }
+
+            cell.addView(moreText)
         }
 
         return cell
