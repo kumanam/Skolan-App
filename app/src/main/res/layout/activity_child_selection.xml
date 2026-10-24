@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Välj barn"
+        android:text="@string/valj_barn"
         android:textSize="28sp"
         android:textStyle="bold" />
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Välj vilket barn du vill se information om."
+        android:text="@string/valj_vilket_barn_du_vill_se_information_om"
         android:textSize="16sp" />
 
     <LinearLayout
