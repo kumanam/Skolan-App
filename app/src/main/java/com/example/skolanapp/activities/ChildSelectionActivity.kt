@@ -43,6 +43,7 @@ class ChildSelectionActivity : AppCompatActivity() {
                         )
                         intent.putExtra("child_id", child.id)
                         intent.putExtra("child_name", child.name)
+                        intent.putExtra("child_class", child.className)
                         startActivity(intent)
                     }
 
