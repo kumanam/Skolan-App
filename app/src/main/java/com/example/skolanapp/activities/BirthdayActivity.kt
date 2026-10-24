@@ -36,8 +36,13 @@ class BirthdayActivity : AppCompatActivity() {
                     RetrofitClient.schoolDataApi.getSchoolData()
                 }
 
+                val selectedClass = intent.getStringExtra("child_class")
+                val classBirthdays = schoolData.birthdays.filter {
+                    it.className == selectedClass
+                }
+
                 binding.recyclerBirthdays.adapter =
-                    BirthdayAdapter(schoolData.birthdays)
+                    BirthdayAdapter(classBirthdays)
 
             } catch (e: Exception) {
                 Toast.makeText(
@@ -48,4 +53,4 @@ class BirthdayActivity : AppCompatActivity() {
             }
         }
     }
-}
+        }
