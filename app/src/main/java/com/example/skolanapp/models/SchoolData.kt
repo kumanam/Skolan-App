@@ -1,7 +1,9 @@
-
 package com.example.skolanapp.models
 
 data class SchoolData(
     val calendar: List<CalendarEvent>,
-    val birthdays: List<Birthday>
+    val birthdays: List<Birthday>,
+    val contacts: List<Contact>,
+    val contactTypes: List<ContactType>
 )
+
