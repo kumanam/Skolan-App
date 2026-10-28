@@ -63,6 +63,9 @@
     <string name="no_upcoming_birthday">Inga kommande födelsedagar</string>
     <string name="schooldata_load_error">Kunde inte ladda skolans information.</string>
     <string name="no_email_app">Ingen e-postapp hittades.</string>
+    <string name="close">Stäng</string>
+    <string name="calendar_event_details">Datum: %1$s\nTid: %2$s\nKategori: %3$s</string>
+
 
 
 </resources>
