@@ -37,7 +37,7 @@
         <activity
             android:name=".activities.BirthdayContactsActivity"
             android:exported="false" />
-        
+
         <activity android:name=".activities.TeacherActivity"
             android:exported="false"/>
 
