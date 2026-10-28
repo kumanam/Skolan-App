@@ -52,13 +52,13 @@ class BirthdayAdapter(
 
     override fun getItemCount(): Int = sortedBirthdays.size
 
+
+
     private fun getNextBirthday(date: String): Calendar? {
         return try {
-            val inputFormat = SimpleDateFormat(
-                "yyyy-MM-dd",
-                Locale.ROOT
-            )
-            inputFormat.isLenient = false
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT).apply {
+                isLenient = false
+            }
 
             val parsedDate = inputFormat.parse(date) ?: return null
 
@@ -69,6 +69,7 @@ class BirthdayAdapter(
             val today = Calendar.getInstance()
 
             val next = Calendar.getInstance().apply {
+                set(Calendar.YEAR, today.get(Calendar.YEAR))
                 set(Calendar.MONTH, original.get(Calendar.MONTH))
                 set(Calendar.DAY_OF_MONTH, original.get(Calendar.DAY_OF_MONTH))
                 set(Calendar.HOUR_OF_DAY, 0)
@@ -77,14 +78,14 @@ class BirthdayAdapter(
                 set(Calendar.MILLISECOND, 0)
             }
 
-            today.set(Calendar.HOUR_OF_DAY, 0)
-            today.set(Calendar.MINUTE, 0)
-            today.set(Calendar.SECOND, 0)
-            today.set(Calendar.MILLISECOND, 0)
+            val todayStart = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
 
-            next.set(Calendar.YEAR, today.get(Calendar.YEAR))
-
-            if (next.before(today)) {
+            if (next.before(todayStart)) {
                 next.add(Calendar.YEAR, 1)
             }
 
@@ -93,4 +94,7 @@ class BirthdayAdapter(
             null
         }
     }
+
 }
+
+
