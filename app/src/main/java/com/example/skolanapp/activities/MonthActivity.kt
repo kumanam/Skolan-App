@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Calendar
 import java.util.Locale
+import androidx.appcompat.app.AlertDialog
 
 class MonthActivity : AppCompatActivity() {
 
@@ -272,6 +273,7 @@ class MonthActivity : AppCompatActivity() {
             )
         )
 
+
         events.take(2).forEach { event ->
             val eventText = TextView(this).apply {
                 text = event.title
@@ -279,6 +281,13 @@ class MonthActivity : AppCompatActivity() {
                 maxLines = 2
                 gravity = Gravity.CENTER
                 setTypeface(null, Typeface.BOLD)
+
+                isClickable = true
+                isFocusable = true
+
+                setOnClickListener {
+                    showEventDetails(event)
+                }
             }
 
             cell.addView(
@@ -289,7 +298,6 @@ class MonthActivity : AppCompatActivity() {
                 )
             )
         }
-
         if (events.size > 2) {
             val moreText = TextView(this).apply {
                 text = "+${events.size - 2}"
@@ -299,9 +307,23 @@ class MonthActivity : AppCompatActivity() {
 
             cell.addView(moreText)
         }
-
         return cell
     }
+    private fun showEventDetails(event: CalendarEvent) {
+        val details = getString(
+            R.string.calendar_event_details,
+            event.date,
+            event.time,
+            event.category
+        )
+
+        AlertDialog.Builder(this)
+            .setTitle(event.title)
+            .setMessage(details)
+            .setPositiveButton(R.string.close, null)
+            .show()
+    }
+
 
     private fun dpToPx(dp: Int): Int {
         return (dp * resources.displayMetrics.density).toInt()
