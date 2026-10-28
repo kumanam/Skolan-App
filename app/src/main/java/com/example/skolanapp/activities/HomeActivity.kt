@@ -66,7 +66,11 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.buttonViewBirthdays.setOnClickListener {
-            startActivity(Intent(this, BirthdayActivity::class.java))
+            val intent = Intent(this, BirthdayActivity::class.java)
+            intent.putExtra("child_id", childId)
+            intent.putExtra("child_name", childName)
+            intent.putExtra("child_class", childClass)
+            startActivity(intent)
         }
 
         drawerBinding.menuBirthdays.setOnClickListener {
@@ -124,6 +128,7 @@ class HomeActivity : AppCompatActivity() {
                     }
 
                 val nextBirthday = schoolData.birthdays
+                    .filter { it.className == childClass }
                     .mapNotNull { birthday ->
                         val nextDate = getNextBirthdayDate(birthday.date)
 
